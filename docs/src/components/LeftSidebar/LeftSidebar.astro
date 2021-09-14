@@ -6,7 +6,7 @@ const {currentPage} = Astro.props;
 // Get the slug w/o a leading or trailing slash
 const currentPageMatch = removeLeadingSlash(removeTrailingSlash(currentPage));
 const langCode = getLanguageFromURL(currentPage);
-// SIDEBAR is a flat array. Group it by sections to properly render. 
+// SIDEBAR is a flat array. Group it by sections to properly render.
 const sidebarSections = SIDEBAR[langCode].reduce((col, item) => {
   if (item.header) {
     col.push({...item, children: []});
@@ -19,7 +19,7 @@ const sidebarSections = SIDEBAR[langCode].reduce((col, item) => {
 ---
 
 <nav aria-labelledby="grid-left">
-  <ul class="nav-groups">  
+  <ul class="nav-groups">
     {sidebarSections.map(section => (
       <li>
         <div class="nav-group">
@@ -32,6 +32,15 @@ const sidebarSections = SIDEBAR[langCode].reduce((col, item) => {
         </div>
       </li>
     ))}
+    <li>
+      <div class="nav-group">
+        <h2 class="nav-group-title">Sponsors</h2>
+        <ul class="sponsors">
+          <li><a href="https://www.netlify.com/"><img width="74" height="20" src="/assets/netlify.svg" alt="Netlify" /></a></li>
+        </ul>
+        <a class="sponsors-signup" href="https://opencollective.com/astrodotbuild" target="_blank">Add your logo</a>
+      </div>
+    </li>
   </ul>
 </nav>
 
@@ -108,4 +117,15 @@ const sidebarSections = SIDEBAR[langCode].reduce((col, item) => {
     }
   }
 
+  .sponsors {
+    padding-left: 1rem;
+    padding-top: 0.375rem;
+  }
+
+  .sponsors-signup {
+    display: block;
+    font-size: 0.8em;
+    padding-left: 1rem;
+    padding-top: 0.5rem;
+  }
 </style>
